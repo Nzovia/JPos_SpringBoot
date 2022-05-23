@@ -1,0 +1,22 @@
+<!-- ******Configuration for the Destination Channel*******
+In the channel we have
+  1.auto-responder host
+  2.auto-responder port
+  3.name for incoming queue
+  4.name for outgoing queue
+
+  NOTE: the auto-responder is up and listening on port 9000
+-->
+
+<channel-adaptor name='jpos-channel'
+                 class="org.jpos.q2.iso.ChannelAdaptor"
+                 logger="Q2">
+    <channel class="org.jpos.iso.channel.XMLChannel"
+             packager="org.jpos.iso.packager.XMLPackager">
+        <property name="host" value="isobridge.jpos.org"/>
+        <property name="port" value="9000"/>
+    </channel>
+    <in>jpos-send</in>
+    <out>jpos-receive</out>
+    <reconnect-delay>10000</reconnect-delay>
+</channel-adaptor>

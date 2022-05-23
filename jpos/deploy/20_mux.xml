@@ -1,0 +1,11 @@
+<!-- the following is the multiplexer configuration-->
+<!--MUX's in is the Channel's out
+   When the channel is connected to a remote host, it places an entry  in the space
+   using its service name eg. (jpos-channel) with the arbitrary suffix, .ready
+-->
+
+<mux class="org.jpos.q2.iso.QMUX" logger="Q2" name="jPOS-AUTORESPONDER">
+    <in>jpos-receive</in>
+    <out>jpos-send</out>
+    <ready>jpos-channel.ready</ready>
+</mux>

@@ -1,0 +1,29 @@
+<!--
+the following code configures a QServer listening to port 8000, using the XMLPackager and XMLChannel
+  1. Listen to port 8000
+  2. Using XMLPackager and XMLChannel
+  3. Queue incoming messages through a Space arbitrarily named TransactionMGR
+  4. Configure IncomingListener to place an arbitrary variable in the TM's context named DESTINATION
+-->
+
+
+<Server class="org.jpos.q2.iso.QServer" logger="Q2"
+        name="xml-server-8000" realm="xml-server-8000">
+    <attr name="port" type="java.Lang.Integer">8000</attr>
+    <channel class="org.jpos.iso.channel.XMLChannel"
+             packager="org.jpos.iso.packager.XMLPackager"
+             type="server"
+             logger="Q2"
+             realm="xml-server-8000">
+        <property name="timeout" value="180000"/>
+    </channel>
+
+    <!--the IncomingListener ISORequestListener handles all the incoming messages -->
+    <request-listener class="org.jpos.iso.IncomingListener" logger="Q2" realm="incoming-request-listener">
+
+    <!-- the value of the queue must be the same as the one in transactionmanager-->
+    <!-- the line states to the IncomingListener that it should use 'TransactionMGR' as the forwarding queue-->
+        <property name="queue" value="TransactionMGR"/>
+        <property name="ctx.DESTINATION" value="jPOS-AUTORESPONDER"/>
+    </request-listener>
+</Server>

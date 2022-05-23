@@ -15,7 +15,7 @@ public class JPosApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Q2 q2 = new Q2();
-        Thread thread = new Thread(q2);
-        thread.start();
+//        Thread thread = new Thread(q2);
+        q2.start();
     }
 }

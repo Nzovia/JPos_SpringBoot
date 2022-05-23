@@ -1,0 +1,26 @@
+
+<!-- The transaction manager creates the connection between the incoming server requests
+and the outgoing channel. Primarily because we have server listening to a given port,
+and both channel and multiplexer are connected to the jPOS autoresponder host
+-->
+<!-- The following transaction_manager is small and does not add much business logic, however this file is
+      where jPOS apps implement business requirements. This is achieved by just adding more participants to the
+      XML configurations as indicated by
+      ***********************************
+      <participant class= " "/>
+-->
+
+
+<transactionmanager class="org.jpos.transaction.TransactionManager"
+                    logger="Q2">
+
+    <!--the value of the queue must be similar to the value defined in the queue of the ISORequestListener in the server-->
+    <property name="queue" value="TransactionMGR"/>
+    <property name="sessions" value="2"/>
+    <property name="max-sessions" value="128"/>
+    <property name="debug" value="true"/>
+    <!--Query host participant is responsible for querying the remote jPOS auto-responder host using the MUX-->
+    <participant class="org.jpos.transaction.participant.QueryHost"/>
+    <!--Testing the setup business logic-->
+    <participant class="org.jpos.transaction.participant.SendResponse"/>
+</transactionmanager>
